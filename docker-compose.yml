@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  hermes-dash:
+    build: .
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      - PORT=3000
+    volumes:
+      - ../..:/mission:ro
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    labels:
+      - "mission=72H"
+      - "autonomy=yes"
+      - "status=alive"

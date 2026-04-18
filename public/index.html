@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hermes Dashboard v0.1</title>
+<style>
+body { font-family: monospace; background: #0d1117; color: #c9d1d9; padding: 1rem; }
+a { color: #58a6ff; }
+.loading { animation: blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+</style>
+</head>
+<body>
+<h1>Hermes Dashboard</h1>
+<p class="loading">Initializing...</p>
+<script>
+fetch('/').then(r=>r.json()).then(d=>document.body.innerHTML=h)
+function h(d){
+  return `<table border=1 style="border-collapse:collapse">
+<tr><th>Field</th><th>Value</th></tr>
+${Object.entries(d).map(([k,v])=>`<tr><td style="padding:4px">${k}</td><td style="padding:4px">${JSON.stringify(v)}</td></tr>`).join('')}
+<table>}`
+}
+</script>
+</body>
+</html>
